@@ -105,16 +105,16 @@ const SectionStepOne = () => {
               />
             </Stack.Item>
             <Stack.Item>
-              <Select />
-            </Stack.Item>
-          </Stack>
-        </Layout.Section>
-        <Layout.Section>
-          <ButtonGroup>
+              <Select />                                                        
+            </Stack.Item>                                                  
+          </Stack>                                                
+        </Layout.Section>                                            
+        <Layout.Section>                                  
+          <ButtonGroup>                                                
             <h1></h1>
-            <h1></h1>
-            <Button>Preview matched products</Button>
-            <Button primary>Add product filter condition</Button>
+            <h1></h1>                                                                                
+            <Button>Preview matched products</Button>                                        
+            <Button primary>Add product filter condition</Button>                                   
           </ButtonGroup>
         </Layout.Section>
         <Layout.Section>
