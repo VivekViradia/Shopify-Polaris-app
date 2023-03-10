@@ -11,8 +11,7 @@ import {
   useIndexResourceState,
 } from "@shopify/polaris";
 import { useState, useCallback } from "react";
-import { useAuthenticatedFetch, useAppQuery } from "../hooks";
-
+import { useAuthenticatedFetch } from "../hooks/useAuthenticatedFetch";
     
 
 const SectionStepOne = () => {
@@ -37,41 +36,16 @@ const SectionStepOne = () => {
     { label: "is not", value: "is not" },
   ];
 
-  // const { data, isLoading:isLeadingTrue } = useAppQuery({
-  //   url: "/api/products", reactQueryOptions: {
-  //     onSuccess: () => {
-  //       setIsLoading(true)
-  //   }
-  // }})
+  const fetchData = async () => {
+    try {
+      const response = await fetch("/api/products")
+      console.log("Data",await response.json())
+    } catch(err) {
+      console.log('Error',err)
+  }
+}
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("/api/products");
-        const data = await response.json();
-        console.log(data, "Data");
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchProducts();
-  }, []);
-
-  // const { selectedResources }  = useIndexResourceState(data)
-
-  // const rowMark = data.map(({ id, title, handle, vendor }, index) => (
-  //   <IndexTable.Row
-  //     key={id}
-  //     id={id}
-  //     position={index}
-  //     selected={selectedResources.includes(id)}
-  //   >
-  //     <IndexTable.Cell>{ title}</IndexTable.Cell> 
-  //     <IndexTable.Cell>{ handle}</IndexTable.Cell> 
-  //     <IndexTable.Cell>{ vendor}</IndexTable.Cell> 
-  //   </IndexTable.Row>
-  // ));
-
+fetchData()
   return (
     <Card>
       <Layout>
@@ -114,18 +88,7 @@ const SectionStepOne = () => {
           </ButtonGroup>
         </Layout.Section>
         <Layout.Section>
-          {/* <Card>
-            <IndexTable
-              itemCount={data.length}
-              headings={[
-                { title: "Title" },
-                { title: "handle" },
-                { title: "vendor" },
-              ]}
-            >
-              {rowMark}
-            </IndexTable>
-          </Card> */}
+    
         </Layout.Section>
         <Layout.Section></Layout.Section>
       </Layout>

@@ -1,8 +1,5 @@
 import { Card, Page, Layout, Stack , Select, Button, ButtonGroup} from "@shopify/polaris";
-import { TitleBar } from "@shopify/app-bridge-react";
 import { useState, useCallback,  } from "react";
-import {Redirect} from '@shopify/app-bridge/actions';
-import {useNavigate} from '@shopify/app-bridge-react';
 import CustomSidebar from "../components/CustomSidebar";
 import SectionStepOne from "../components/SectionStepOne";
 
