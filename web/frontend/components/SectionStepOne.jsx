@@ -10,15 +10,15 @@ import {
   useIndexResourceState,
 } from "@shopify/polaris";
 import { useState, useCallback } from "react";
-import { useAppQuery , useAuthenticatedFetch} from "../hooks";
+import { useAppQuery, useAuthenticatedFetch } from "../hooks";
 
 const SectionStepOne = () => {
-  const fetch = useAuthenticatedFetch();
-
   const [selected, setSelected] = useState("today");
   const [selected2, setSelected2] = useState("is");
   const [selected3, setSelected3] = useState("");
   const [loading, setIsLoading] = useState(false);
+
+  const fetch = useAuthenticatedFetch();
 
   const handleSelectChange = useCallback((value) => setSelected(value), []);
   const handleSelectChange2 = useCallback((value) => setSelected2(value), []);
@@ -42,26 +42,28 @@ const SectionStepOne = () => {
       },
     },
   });
+  console.log("Data", data);
 
-  console.log("Data",data)
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("/api/products");
-        console.log("Data", await response.json());
+        const data = await response.json();
+        console.log("Data44444", data);
       } catch (err) {
         console.log("Error", err);
       }
     };
-
     fetchData();
   }, []);
 
   const { selectedResources } = useIndexResourceState(data);
-  console.log("DATA", data);
+  console.log("DATA!!!!!!!!!", data);
 
-  const rowMark = () => {data.map(({ id, title, handle, vendor }, index) => {
-      return <IndexTable.Row
+  const rowMark = () => {
+    data.map(({ id, title, handle, vendor }, index) => (
+      
+      <IndexTable.Row
         key={id}
         id={id}
         position={index}
@@ -71,9 +73,8 @@ const SectionStepOne = () => {
         <IndexTable.Cell>{handle}</IndexTable.Cell>
         <IndexTable.Cell>{vendor}</IndexTable.Cell>
       </IndexTable.Row>
-    })
-   
-  }
+    ));
+  };
 
   return (
     <Card>
@@ -104,16 +105,16 @@ const SectionStepOne = () => {
               />
             </Stack.Item>
             <Stack.Item>
-              <Select />                                                        
-            </Stack.Item>                                                  
-          </Stack>                                                
-        </Layout.Section>                                            
-        <Layout.Section>                                  
-          <ButtonGroup>                                                
+              <Select />
+            </Stack.Item>
+          </Stack>
+        </Layout.Section>
+        <Layout.Section>
+          <ButtonGroup>
             <h1></h1>
-            <h1></h1>                                                                                
-            <Button>Preview matched products</Button>                                        
-            <Button primary>Add product filter condition</Button>                                   
+            <h1></h1>
+            <Button>Preview matched products</Button>
+            <Button primary>Add product filter condition</Button>
           </ButtonGroup>
         </Layout.Section>
         <Layout.Section>
