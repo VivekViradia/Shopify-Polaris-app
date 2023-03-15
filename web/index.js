@@ -139,7 +139,7 @@ app.get("/api/collections", async (req, res) => {
     const client = new shopify.api.clients.Graphql({ session });
     const response = await client.query({
       data: `query{
-    collections(first:5){
+    collections(first: 5){
       edges{
         node{
           id

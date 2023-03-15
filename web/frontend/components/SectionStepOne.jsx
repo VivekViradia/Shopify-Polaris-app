@@ -34,15 +34,16 @@ const SectionStepOne = () => {
     { label: "is not", value: "is not" },
   ];
 
-  // const { data, isLoading: isLoadingTrue } = useAppQuery({
-  //   url: "/api/products",
-  //   reactQueryOptions: {
-  //     onSuccess: () => {
-  //       setIsLoading(true);
-  //     },
-  //   },
-  // });
+  const { data, isLoading: isLoadingTrue } = useAppQuery({
+    url: "/api/products",
+    reactQueryOptions: {
+      onSuccess: () => {
+        setIsLoading(true);
+      },
+    },
+  });
 
+  console.log("Data",data)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,23 +57,23 @@ const SectionStepOne = () => {
     fetchData();
   }, []);
 
-  // const { selectedResources } = useIndexResourceState(data);
-  // console.log("DATA", data);
+  const { selectedResources } = useIndexResourceState(data);
+  console.log("DATA", data);
 
-  // const rowMark = () => {data.map(({ ids, title, handle, vendor }, index) => {
-  //     return <IndexTable.Row
-  //       key={ids}
-  //       id={ids}
-  //       position={index}
-  //       selected={selectedResources.includes(ids)}
-  //     >
-  //       <IndexTable.Cell>{title}</IndexTable.Cell>
-  //       <IndexTable.Cell>{handle}</IndexTable.Cell>
-  //       <IndexTable.Cell>{vendor}</IndexTable.Cell>
-  //     </IndexTable.Row>
-  //   })
+  const rowMark = () => {data.map(({ id, title, handle, vendor }, index) => {
+      return <IndexTable.Row
+        key={id}
+        id={id}
+        position={index}
+        selected={selectedResources.includes(id)}
+      >
+        <IndexTable.Cell>{title}</IndexTable.Cell>
+        <IndexTable.Cell>{handle}</IndexTable.Cell>
+        <IndexTable.Cell>{vendor}</IndexTable.Cell>
+      </IndexTable.Row>
+    })
    
-  // }
+  }
 
   return (
     <Card>
@@ -116,7 +117,7 @@ const SectionStepOne = () => {
           </ButtonGroup>
         </Layout.Section>
         <Layout.Section>
-          {/* <Card>
+          <Card>
             <IndexTable
               itemCount={data.length}
               headings={[
@@ -127,7 +128,7 @@ const SectionStepOne = () => {
             >
               {rowMark}
             </IndexTable>
-          </Card> */}
+          </Card>
         </Layout.Section>
         <Layout.Section></Layout.Section>
       </Layout>
