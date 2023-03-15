@@ -47,29 +47,29 @@ app.get("/api/products/count", async (_req, res) => {
 
 //-----------------------------------------------------------------------------------
 
-app.get("/api/products/create", async (req, res) => {
-  if (!req?.body?.title) {
-    return res.status(400).json({ 'message': "Field is Required" });
+app.get("/api/products/create", async( req, res) => {
+  if(!req?.body?.title) {
+    return res.status(400).json({ 'message': 'field is required'})
   }
 
-  let status = 200;
-  let error = null;
+  let status = 200
+  let error = null
   try {
-    const session = res.locals.shopify.session;
-    const client = new shopify.api.clients.Graphql({ session });
+    const session = res.locals.shopify.session
+    const client = new shopify.api.clients.Graphql({session});
     await client.query({
-      data: `mutation{
-        productCreate(input: {title: ${req.body.title}, productType:"snowboard", vendor:"apple"}){
-          product{
+      data: `mutation {
+        productCreate(input: { title: ${req.body.title}, productType: "snowboard", vendor: "apple" }) {
+          product {
             id
           }
         }
-      }`,
-    });
-  } catch (err) {
-    console.log(`failed to process request ${err}`);
-    status = 500;
-    error = err.message;
+      }`
+    })
+  } catch(err) {
+    console.log(`failed to process request ${err}`)
+    status = 500
+    error = err.message
   }
   res.status(status).send({ sucess: status === 200, error });
 });
@@ -78,40 +78,42 @@ app.get("/api/products/create", async (req, res) => {
 
 app.get("/api/products", async (req, res) => {
   try {
-    const session = res.locals.shopify.session;
-    const data = await shopify.api.rest.Product.all({ session: session });
-    res.status(200).send(data);
-  } catch (err) {
-    console.log("Product API Error ",err)
+    const session = res.locals.shopify.session
+    const data = await shopify.api.rest.Product.all({session: session})
+    res.status(200).send(data)
+
+  } catch(err) {
+    console.log(err)
   }
 });
 
 //-----------------------------------------------------------------------------------
 
-app.get("/api/orders/", async (req, res) => {
+app.get("/api/orders", async (req, res) => {
   try {
-    const session = res.locals.shopify.session;
-    const client = new shopify.api.clients.Graphql({ session });
+    const session = res.locals.shopify.session
+    const client = new shopify.api.clients.Graphql({session})
 
     const queryString = `{
-      orders(first:5){
-        edges{
-
-        }node{
+      orders(first: 5) {
+        edges {
+        } node {
           id
           name
           note
-          displayFinancalStatus
+          displayFinancialStatus
         }
       }
-    }`;
+    }`
 
     const data = await client.query({
       data: queryString
     });
-    res.status(200).send({data});
-  } catch (err) {
-    res.status(500).send(err);
+
+    res.status(200).send({data})
+
+  } catch(err){
+     res.status(500).send(err);
   }
 });
 

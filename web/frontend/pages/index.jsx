@@ -5,26 +5,6 @@ import SectionStepOne from "../components/SectionStepOne";
 
 
 export default function Home() {
-  const [selected, setSelected] = useState('today');
-  const [selected2, setSelected2] = useState('is');
-
-
-
-  const handleSelectChange = useCallback((value) => setSelected(value), []);
-  const handleSelectChange2 = useCallback((value) => setSelected2(value), []);
-
-  const options = [
-    {label: 'Collections', value: 'today'},
-    {label: 'Yesterday', value: 'yesterday'},
-    {label: 'Last 7 days', value: 'lastWeek'},
-  ];
-
-  const condition = [
-    {label: 'is', value: 'is'},
-    {label: 'is not', value: 'is not'},
-  ];
-
-
   return (
     <Page fullWidth >
       <Stack wrap={false}>

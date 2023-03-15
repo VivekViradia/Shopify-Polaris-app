@@ -10,7 +10,6 @@ import {
   useIndexResourceState,
 } from "@shopify/polaris";
 import { useState, useCallback } from "react";
-// import { useAuthenticatedFetch } from "../hooks/useAuthenticatedFetch";
 import { useAppQuery , useAuthenticatedFetch} from "../hooks";
 
 const SectionStepOne = () => {
@@ -60,8 +59,7 @@ const SectionStepOne = () => {
   // const { selectedResources } = useIndexResourceState(data);
   // console.log("DATA", data);
 
-  // const rowMark = () => {
-  //   (data && data.length > 0) ? data.map(({ ids, title, handle, vendor }, index) => {
+  // const rowMark = () => {data.map(({ ids, title, handle, vendor }, index) => {
   //     return <IndexTable.Row
   //       key={ids}
   //       id={ids}
@@ -73,7 +71,7 @@ const SectionStepOne = () => {
   //       <IndexTable.Cell>{vendor}</IndexTable.Cell>
   //     </IndexTable.Row>
   //   })
-  //     : <>Hello there</>
+   
   // }
 
   return (
@@ -127,7 +125,6 @@ const SectionStepOne = () => {
                 { title: "Vender" },
               ]}
             >
-              hey there
               {rowMark}
             </IndexTable>
           </Card> */}
