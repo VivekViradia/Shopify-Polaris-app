@@ -34,15 +34,28 @@ const SectionStepOne = () => {
     { label: "is not", value: "is not" },
   ];
 
-  const { data, isLoading: isLoadingTrue } = useAppQuery({
-    url: "/api/products",
-    reactQueryOptions: {
-      onSuccess: () => {
-        setIsLoading(true);
-      },
-    },
-  });
-  console.log("Data123", data);
+
+  // Final Code for Product (Line: 38-47)
+  // const { data, isLoading: isLoadingTrue } = useAppQuery({
+  //   url: "/api/products",
+  //   reactQueryOptions: {
+  //     onSuccess: () => {
+  //       setIsLoading(true);
+  //     },
+  //   },
+  // });
+  // console.log("Data123", data);
+
+  // Code for console log whole data of collections(Line: 49-58)
+  // const { data, isLoading: isLoadingTrue } = useAppQuery({
+  //   url: "/api/collections",
+  //   reactQueryOptions: {
+  //     onSuccess: () => {
+  //       setIsLoading(true);
+  //     },
+  //   },
+  // });
+  // console.log("Data123", data);
 
   const fetchData = async () => {
     try {
@@ -131,7 +144,7 @@ const SectionStepOne = () => {
                 data.map(({ id, title, handle, vendor }, index) => rowMark(id, title, handle, vendor ,index))
                }
              </IndexTable>
-            }
+            }+
            
           </Card>
         </Layout.Section>
