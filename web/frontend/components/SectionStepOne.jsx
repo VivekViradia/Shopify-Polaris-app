@@ -144,7 +144,7 @@ const SectionStepOne = () => {
                 data.map(({ id, title, handle, vendor }, index) => rowMark(id, title, handle, vendor ,index))
                }
              </IndexTable>
-            }+
+            }
            
           </Card>
         </Layout.Section>
