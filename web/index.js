@@ -185,3 +185,6 @@ app.use("/*", shopify.ensureInstalledOnShop(), async (_req, res, _next) => {
 });
 
 app.listen(PORT);
+
+// https://{store_name}.myshopify.com/admin/api/2023-01/{resource}.json
+// https://projectvivek.myshopify.com/admin/api/2023-01/product.json
