@@ -42,28 +42,28 @@ const SectionStepOne = () => {
       },
     },
   });
-  console.log("Data", data);
+  console.log("Data123", data);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("/api/products");
+      const data = await response.json();
+      console.log("Data44444", data);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/products");
-        const data = await response.json();
-        console.log("Data44444", data);
-      } catch (err) {
-        console.log("Error", err);
-      }
-    };
+   
     fetchData();
   }, []);
 
   const { selectedResources } = useIndexResourceState(data);
   console.log("DATA!!!!!!!!!", data);
 
-  const rowMark = () => {
-    data.map(({ id, title, handle, vendor }, index) => (
-      
-      <IndexTable.Row
+  const rowMark = (id, title, handle, vendor, index) => {
+      return <IndexTable.Row
         key={id}
         id={id}
         position={index}
@@ -73,7 +73,6 @@ const SectionStepOne = () => {
         <IndexTable.Cell>{handle}</IndexTable.Cell>
         <IndexTable.Cell>{vendor}</IndexTable.Cell>
       </IndexTable.Row>
-    ));
   };
 
   return (
@@ -119,16 +118,21 @@ const SectionStepOne = () => {
         </Layout.Section>
         <Layout.Section>
           <Card>
-            <IndexTable
-              itemCount={data.length}
-              headings={[
-                { title: "Title" },
-                { title: "Handle" },
-                { title: "Vender" },
-              ]}
-            >
-              {rowMark}
-            </IndexTable>
+            {
+               data && data.length && <IndexTable
+               itemCount={data.length}
+               headings={[
+                 { title: "Title" },
+                 { title: "Handle" },                 
+                 { title: "Vender" },
+               ]}
+             >
+               {
+                data.map(({ id, title, handle, vendor }, index) => rowMark(id, title, handle, vendor ,index))
+               }
+             </IndexTable>
+            }
+           
           </Card>
         </Layout.Section>
         <Layout.Section></Layout.Section>
