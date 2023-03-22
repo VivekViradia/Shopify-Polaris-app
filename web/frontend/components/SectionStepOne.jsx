@@ -62,8 +62,6 @@ const SectionStepOne =  () => {
       setCol_data(data.body.data.collections.edges)
     }
   }, [data])
-
-
   // const fetchData = async () => {
   //   try {
   //     const response = await fetch("/api/products");
@@ -146,8 +144,8 @@ const SectionStepOne =  () => {
         {/* <Layout.Section>
           <Card>
             {
-               data && data.length && <IndexTable
-               itemCount={data.length}
+               product_data && product_data.length && <IndexTable
+               itemCount={product_data.length}
                headings={[
                  { title: "Title" },
                  { title: "Handle" },                 
