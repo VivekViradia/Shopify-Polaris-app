@@ -17,6 +17,7 @@ const SectionStepOne =  () => {
   const [selected2, setSelected2] = useState("is");
   const [selected3, setSelected3] = useState("");
   const [loading, setIsLoading] = useState(false);
+  const [Col_data, setCol_data] = useState(null);
 
   const fetch = useAuthenticatedFetch();
 
@@ -36,7 +37,7 @@ const SectionStepOne =  () => {
 
 
   // // Final Code for Product (Line: 38-47)
-  // const { data, isLoading: isLoadingTrue } = useAppQuery({
+  // const { product_data, isLoading: isLoadingTrue_product } = useAppQuery({
   //   url: "/api/products",
   //   reactQueryOptions: {
   //     onSuccess: () => {
@@ -44,10 +45,10 @@ const SectionStepOne =  () => {
   //     },
   //   },
   // });
-  // console.log("Data123", data);
+  // console.log("Data123", product_data);
 
   // Code for console log whole data of collections(Line: 49-58)
-  const { data, isLoading: isLoadingTrue } =  useAppQuery({
+  const { data, isLoading: isLoadingTrue_collection } =  useAppQuery({
     url: "/api/collections",
     reactQueryOptions: {
       onSuccess: () => {
@@ -55,41 +56,44 @@ const SectionStepOne =  () => {
       }
     }
   });
-  if (data) {
-    const collection_data = data.body.data.collections.edges
-  console.log("Data123", collection_data);
-  }
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch("/api/products");
-      const data = await response.json();
-      // console.log("Data44444", data);
-    } catch (err) {
-      console.log("Error", err);
-    }
-  };
 
   useEffect(() => {
+    if (data) {
+      setCol_data(data.body.data.collections.edges)
+    }
+  }, [data])
+
+
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch("/api/products");
+  //     const data = await response.json();
+  //     // console.log("Data44444", data);
+  //   } catch (err) {
+  //     console.log("Error", err);
+  //   }
+  // };
+
+  // useEffect(() => {
    
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
-  // const { selectedResources } = useIndexResourceState(data);
-  // console.log("DATA!!!!!!!!!", data);
+  // const { selectedResources } = useIndexResourceState(product_data);
+  // console.log("DATA!!!!!!!!!", product_data);
 
-  const rowMark = (id, title, handle, vendor, index) => {
-      return <IndexTable.Row
-        key={id}
-        id={id}
-        position={index}
-        selected={selectedResources.includes(id)}
-      >
-        <IndexTable.Cell>{title}</IndexTable.Cell>
-        <IndexTable.Cell>{handle}</IndexTable.Cell>
-        <IndexTable.Cell>{vendor}</IndexTable.Cell>
-      </IndexTable.Row>
-  };
+  // const rowMark = (id, title, handle, vendor, index) => {
+  //     return <IndexTable.Row
+  //       key={id}
+  //       id={id}
+  //       position={index}
+  //       selected={selectedResources.includes(id)}
+  //     >
+  //       <IndexTable.Cell>{title}</IndexTable.Cell>
+  //       <IndexTable.Cell>{handle}</IndexTable.Cell>
+  //       <IndexTable.Cell>{vendor}</IndexTable.Cell>
+  //     </IndexTable.Row>
+  // };
 
   return (
     <Card>
@@ -98,6 +102,13 @@ const SectionStepOne =  () => {
           <Stack>
             <Stack.Item></Stack.Item>
             <Stack.Item>
+              {
+                <p>
+                {isLoadingTrue_collection ? "Loading......" : Col_data &&  Array.isArray(Col_data) && Col_data.map((element, index) => (
+                  <li>{ element.node.title}</li>
+                ))}
+              </p>
+              }
               <h2>Products must match all conditions</h2>
             </Stack.Item>
           </Stack>
