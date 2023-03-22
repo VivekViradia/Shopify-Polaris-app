@@ -29,7 +29,7 @@ export default function App() {
                 },{
                   label: "Tutorial Videos",
                   destination: "/tutorialvideos",
-                },
+                }
               ]}
             />
             <Routes pages={pages} />

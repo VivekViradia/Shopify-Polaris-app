@@ -12,7 +12,7 @@ import {
 import { useState, useCallback } from "react";
 import { useAppQuery, useAuthenticatedFetch } from "../hooks";
 
-const SectionStepOne = () => {
+const SectionStepOne =  () => {
   const [selected, setSelected] = useState("today");
   const [selected2, setSelected2] = useState("is");
   const [selected3, setSelected3] = useState("");
@@ -47,21 +47,24 @@ const SectionStepOne = () => {
   // console.log("Data123", data);
 
   // Code for console log whole data of collections(Line: 49-58)
-  const { data, isLoading: isLoadingTrue } = useAppQuery({
+  const { data, isLoading: isLoadingTrue } =  useAppQuery({
     url: "/api/collections",
     reactQueryOptions: {
       onSuccess: () => {
         setIsLoading(true);
-      },
-    },
+      }
+    }
   });
-  console.log("Data123", data);
+  if (data) {
+    const collection_data = data.body.data.collections.edges
+  console.log("Data123", collection_data);
+  }
 
   const fetchData = async () => {
     try {
       const response = await fetch("/api/products");
       const data = await response.json();
-      console.log("Data44444", data);
+      // console.log("Data44444", data);
     } catch (err) {
       console.log("Error", err);
     }
@@ -72,8 +75,8 @@ const SectionStepOne = () => {
     fetchData();
   }, []);
 
-  const { selectedResources } = useIndexResourceState(data);
-  console.log("DATA!!!!!!!!!", data);
+  // const { selectedResources } = useIndexResourceState(data);
+  // console.log("DATA!!!!!!!!!", data);
 
   const rowMark = (id, title, handle, vendor, index) => {
       return <IndexTable.Row
@@ -129,7 +132,7 @@ const SectionStepOne = () => {
             <Button primary>Add product filter condition</Button>
           </ButtonGroup>
         </Layout.Section>
-        <Layout.Section>
+        {/* <Layout.Section>
           <Card>
             {
                data && data.length && <IndexTable
@@ -147,7 +150,7 @@ const SectionStepOne = () => {
             }
            
           </Card>
-        </Layout.Section>
+        </Layout.Section> */}
         <Layout.Section></Layout.Section>
       </Layout>
     </Card>
