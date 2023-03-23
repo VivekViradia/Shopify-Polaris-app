@@ -12,7 +12,7 @@ import {
 import { useState, useCallback } from "react";
 import { useAppQuery, useAuthenticatedFetch } from "../hooks";
 
-const SectionStepOne =  () => {
+const SectionStepOne = () => {
   const [selected, setSelected] = useState("today");
   const [selected2, setSelected2] = useState("is");
   const [selected3, setSelected3] = useState("");
@@ -35,7 +35,6 @@ const SectionStepOne =  () => {
     { label: "is not", value: "is not" },
   ];
 
-
   // // Final Code for Product (Line: 38-47)
   // const { product_data, isLoading: isLoadingTrue_product } = useAppQuery({
   //   url: "/api/products",
@@ -48,20 +47,20 @@ const SectionStepOne =  () => {
   // console.log("Data123", product_data);
 
   // Code for console log whole data of collections(Line: 49-58)
-  const { data, isLoading: isLoadingTrue_collection } =  useAppQuery({
+  const { data, isLoading: isLoadingTrue_collection } = useAppQuery({
     url: "/api/collections",
     reactQueryOptions: {
       onSuccess: () => {
         setIsLoading(true);
-      }
-    }
+      },
+    },
   });
 
   useEffect(() => {
     if (data) {
-      setCol_data(data.body.data.collections.edges)
+      setCol_data(data.body.data.collections.edges);
     }
-  }, [data])
+  }, [data]);
   // const fetchData = async () => {
   //   try {
   //     const response = await fetch("/api/products");
@@ -73,7 +72,7 @@ const SectionStepOne =  () => {
   // };
 
   // useEffect(() => {
-   
+
   //   fetchData();
   // }, []);
 
@@ -101,11 +100,17 @@ const SectionStepOne =  () => {
             <Stack.Item></Stack.Item>
             <Stack.Item>
               {
-                <p>
-                {isLoadingTrue_collection ? "Loading......" : Col_data &&  Array.isArray(Col_data) && Col_data.map((element, index) => (
-                  <li>{ element.node.title}</li>
-                ))}
-              </p>
+                <div>
+                  {isLoadingTrue_collection
+                    ? "Loading......"
+                    : Col_data &&
+                      Array.isArray(Col_data) &&
+                      Col_data.map((element, index) => (
+                        <ul key={index}>
+                          <li>{element.node.title}</li>
+                        </ul>
+                      ))}
+                </div>
               }
               <h2>Products must match all conditions</h2>
             </Stack.Item>
