@@ -8,6 +8,9 @@ import {
   ButtonGroup,
   IndexTable,
   useIndexResourceState,
+  Form,
+  FormLayout,
+  TextField,
 } from "@shopify/polaris";
 import { useState, useCallback } from "react";
 import { useAppQuery, useAuthenticatedFetch } from "../hooks";
@@ -18,6 +21,7 @@ const SectionStepOne = () => {
   const [selected3, setSelected3] = useState("");
   const [loading, setIsLoading] = useState(false);
   const [Col_data, setCol_data] = useState(null);
+  const [title, setTitle] = useState("");
 
   const fetch = useAuthenticatedFetch();
 
@@ -92,6 +96,14 @@ const SectionStepOne = () => {
   //     </IndexTable.Row>
   // };
 
+  const handleTitleChange = useCallback((value) => setTitle(value), [])
+  
+  const handleSubmit = async () => {
+    const response = await fetch('api/product/create', {
+      title: title
+  })
+  }
+
   return (
     <Card>
       <Layout>
@@ -165,6 +177,19 @@ const SectionStepOne = () => {
            
           </Card>
         </Layout.Section> */}
+        <Layout.Section>
+          <Form onSubmit={handleSubmit}>
+            <FormLayout>
+              <TextField type="text"
+                value={title}
+                onChange={handleTitleChange}
+              />
+              <Button>
+                Submit
+              </Button>
+            </FormLayout>
+          </Form>
+        </Layout.Section>
         <Layout.Section></Layout.Section>
       </Layout>
     </Card>
